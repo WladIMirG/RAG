@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+# Load environment variables
+OPEN_AI_KEY = os.getenv("OPEN_AI_KEY")
+MARITAKA_KEY = os.getenv("MARITAKA_KEY")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'chatbot',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +72,10 @@ TEMPLATES = [
         },
     },
 ]
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [BASE_DIR / "chatbot/static"]
 
 WSGI_APPLICATION = 'chatbot_unicamp.wsgi.application'
 

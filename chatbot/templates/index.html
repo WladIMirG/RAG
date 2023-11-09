@@ -1,0 +1,88 @@
+
+{% comment %} <form action="#" method="post">
+    {% csrf_token %}
+    <input type="text" name="question" placeholder="Haz una pregunta...">
+    <input type="submit" value="Enviar">
+</form> {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="br-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Unicamp 2024</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Chatbot Unicamp 2024</h1>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message">
+                {% comment %} <strong>Chatbot:</strong> ¡Hola! Soy el chatbot de la Unicamp 2024. ¿En qué puedo ayudarte hoy? {% endcomment %}
+                {% for message in messages %}
+                    {% if message.role == 'user' %}
+                        <p class="{{ message.role }}">
+                            <strong>Tu:</strong> {{ message.content.content }}
+                        </p>
+                    {% else %}
+                        <p class="{{ message.role }}">
+                            <strong>Chatbot:</strong> {{ message.content.content }}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+
+                {% comment %} {% for message in messages %}
+                    <p class="{{ message.role }}">{{ message }}</p>
+                {% endfor %} {% endcomment %}
+            </div>
+        </div>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" id="user-input" placeholder="Escribe tu pregunta...">
+            <button type="submit">Enviar</button>
+        </form>
+
+    </div>
+
+    <script>
+        function sendMessage(event) {
+            event.preventDefault();
+            var userMessage = document.getElementById('user-input').value;
+            var chatMessages = document.getElementById('chat-messages');
+        
+            // Añadir mensaje del usuario
+            var userMessageElement = document.createElement('div');
+            userMessageElement.className = 'message';
+            userMessageElement.innerHTML = '<strong>Tú:</strong> ' + userMessage;
+            chatMessages.appendChild(userMessageElement);
+        
+            // Limpiar el campo de entrada
+            document.getElementById('user-input').value = '';
+        }
+
+        function typeMessage(message, element) {
+            var index = 0;
+            var timer = setInterval(function() {
+                element.innerHTML += message[index];
+                index++;
+                if (index === message.length) {
+                    clearInterval(timer);
+                }
+            }, 50); // Intervalo entre letras en milisegundos (ajústalo según tus preferencias)
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            var botMessageElement = document.createElement('div');
+            botMessageElement.className = 'message';
+            botMessageElement.innerHTML = '<strong>Chatbot:</strong> ';
+    
+            document.getElementById('chat-messages').appendChild(botMessageElement);
+            
+            if ({{ respuesta_chatbot|escapejs }}) {
+                typeMessage("{{ value|escapejs }}", botMessageElement);
+            }
+        });
+    </script>
+</body>
+</html>
