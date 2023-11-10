@@ -73,9 +73,6 @@ TEMPLATES = [
     },
 ]
 
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [BASE_DIR / "chatbot/static"]
 
 WSGI_APPLICATION = 'chatbot_unicamp.wsgi.application'
 
@@ -126,6 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [BASE_DIR / "chatbot/static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
