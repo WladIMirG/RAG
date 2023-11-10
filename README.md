@@ -3,7 +3,7 @@
 
 > Para conhecer requerimentos e instalações [Install.md](install.md)
 >
->Pode consultar a versão em PDF de este projeto [Informe_chatbot.pdf](informe_chatbot.pdf)
+>Pode consultar a versão em PDF de este projeto [Informe_chatbot.pdf](Informe_chatbot.pdf)
 ___
 
 # Dataset
