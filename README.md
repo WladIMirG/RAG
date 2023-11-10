@@ -1,9 +1,9 @@
 
 # Informe chatbot
 
-> Para conhecer requerimentos e instalações [install.md](install.md)
+> Para conhecer requerimentos e instalações [Install.md](install.md)
 >
->Pode consultar a versão em PDF de este projeto [informe_chatbot.pdf](informe_chatbot.pdf)
+>Pode consultar a versão em PDF de este projeto [Informe_chatbot.pdf](informe_chatbot.pdf)
 ___
 
 # Dataset
