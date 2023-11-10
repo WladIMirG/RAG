@@ -6,7 +6,7 @@
 >Pode consultar a versão em PDF de este projeto [Informe_chatbot.pdf](/Informe_chatbot%20.pdf)
 ___
 
-# Dataset
+# UVQuAD
 
 ## Intro
 
@@ -101,7 +101,7 @@ O prompt ficou da seguinte forma:
 """
 	Você é um anotador de dados.
 	Dado um contexto o anotador deve fornecer três perguntas e três respostas para cada pergunta.
-	As perguntas devem esclareçam possíveis dúvidas de um usuário sobre esse contexto.
+	As perguntas devem aclarar possíveis dúvidas de um usuário sobre esse contexto.
 	As respostas devem solucionar a pergunta usando o mesmo contexto.
 	As respostas devem estar contida no contexto.
 	As respostas devem ser sucintas.
@@ -310,31 +310,11 @@ Além do EM e do F1 Score, também foi aplicado o *Word Error Rate* (WER) para a
 
 | ID | Pergunta | R ChatGPT | Score | R MariTalk | Score |
 | --- | --- | --- | --- | --- | --- |
-| 83 | A partir de qual ano os candidatos aprovados em comissões de heteroidentificação na Unicamp estão dispensados da averiguação? | Os candidatos que se submeteram e foram aprovados em comissões de heteroidentificação a partir de 2020 estão dispensados do procedimento de averiguação na Unicamp. | EM:  0.0,
-F1:  83.72,
-WER: 0.94 | O procedimento de heteroidentiicação da Unicamp é realizado por uma comissão composta por três membros. | EM:  0.0,
-F1:  22.85,
-WER: 0.94 |
-| 209 | Qual é a precisão utilizada para arredondar a NPF1? | A NPF1 é arredondada para uma casa decimal com precisão de 0,1. | EM:  100.0,
-F1:  100.0,
-WER: 0.083 | Com base no contexto: "A Comvest, após o término da 2a fase, procederá à apuração dos resultados de todos os candidatos, de acordo com os critérios previamente estabelecidos, e divulgará...  | EM:  0.0,
-F1:  20.0,
-WER: 4.5 |
-| 440 | Quantas vagas são destinadas à concorrência para ampla concorrência no curso de Ciência da Computação (Noturno)? | Desculpe, como um chatbot, não tenho acesso às informações específicas sobre o número de vagas destinadas à concorrência para ampla concorrência no curso de Ciência da Computação (Noturno) na Unicamp. Sugiro verificar as informações atualizadas no site oficial da Unicamp ou entrar em contato com a comissão responsável pelo Vestibular da Unicamp para obter esses dados. | EM:  0.0,
-F1:  40.0,
-WER: 2.88 | {'Erro': HTTPError('429 Client Error: Too Many Requests for url: https://chat.maritaca.ai/api/chat/inference')} | EM:  0.0,
-F1:  0.0,
-WER: 1.0 |
-| 1154 | Quais são as restrições para o Vídeo III? | As restrições para o Vídeo III são as seguintes: a duração máxima é de 12 minutos e o tamanho máximo é de 500MB. A pontuação possível para o Vídeo III varia de 0 a 24 pontos. | EM:  0.0,
-F1:  64.0,
-WER: 1.52 | Com base no contexto: "A gravação em vídeo deve conter:  1- Uma exposição oral, por parte do candidato, de linhas gerais da aula, explicitando:  - Repertório a ser utilizado.  - Conhecimento musical... | EM:  0.0,
-F1:  13.55,
-WER: 2.64 |
-| 1217 | Qual é a cidade em que será realizada a avaliação por equipe multiprofissional e interdisciplinar? | A avaliação por equipe multiprofissional e interdisciplinar é realizada em Campinas. | EM:  0.0,
-F1:  90.0,
-WER: 0.09 | Com base no contexto: "A Comvest reserva-se o direito de não atender as solicitações de condições especiais que não se enquadrem nas especificidades dos recursos disponíveis ou que não sejam compatíveis com as condições de realização das provas.", responda a pergunta: "Pode a Comvest negar alguma solicitação de condição especial?". Resposta: | EM:  0.0,
-F1:  3.27,
-WER: 4.63 |
+| 83 | A partir de qual ano os candidatos aprovados em comissões de heteroidentificação na Unicamp estão dispensados da averiguação? | Os candidatos que se submeteram e foram aprovados em comissões de heteroidentificação a partir de 2020 estão dispensados do procedimento de averiguação na Unicamp. | EM:  0.0, F1:  83.72, WER: 0.94 | O procedimento de heteroidentiicação da Unicamp é realizado por uma comissão composta por três membros. | EM:  0.0, F1:  22.85, WER: 0.94 |
+| 209 | Qual é a precisão utilizada para arredondar a NPF1? | A NPF1 é arredondada para uma casa decimal com precisão de 0,1. | EM:  100.0, F1:  100.0, WER: 0.083 | Com base no contexto: "A Comvest, após o término da 2a fase, procederá à apuração dos resultados de todos os candidatos, de acordo com os critérios previamente estabelecidos, e divulgará...  | EM:  0.0, F1:  20.0, WER: 4.5 |
+| 440 | Quantas vagas são destinadas à concorrência para ampla concorrência no curso de Ciência da Computação (Noturno)? | Desculpe, como um chatbot, não tenho acesso às informações específicas sobre o número de vagas destinadas à concorrência para ampla concorrência no curso de Ciência da Computação (Noturno) na Unicamp. Sugiro verificar as informações atualizadas no site oficial da Unicamp ou entrar em contato com a comissão responsável pelo Vestibular da Unicamp para obter esses dados. | EM:  0.0, F1:  40.0, WER: 2.88 | {'Erro': HTTPError('429 Client Error: Too Many Requests for url: https://chat.maritaca.ai/api/chat/inference')} | EM:  0.0, F1:  0.0, WER: 1.0 |
+| 1154 | Quais são as restrições para o Vídeo III? | As restrições para o Vídeo III são as seguintes: a duração máxima é de 12 minutos e o tamanho máximo é de 500MB. A pontuação possível para o Vídeo III varia de 0 a 24 pontos. | EM:  0.0, F1:  64.0, WER: 1.52 | Com base no contexto: "A gravação em vídeo deve conter:  1- Uma exposição oral, por parte do candidato, de linhas gerais da aula, explicitando:  - Repertório a ser utilizado.  - Conhecimento musical... | EM:  0.0, F1:  13.55, WER: 2.64 |
+| 1217 | Qual é a cidade em que será realizada a avaliação por equipe multiprofissional e interdisciplinar? | A avaliação por equipe multiprofissional e interdisciplinar é realizada em Campinas. | EM:  0.0, F1:  90.0, WER: 0.09 | Com base no contexto: "A Comvest reserva-se o direito de não atender as solicitações de condições especiais que não se enquadrem nas especificidades dos recursos disponíveis ou que não sejam compatíveis com as condições de realização das provas.", responda a pergunta: "Pode a Comvest negar alguma solicitação de condição especial?". Resposta: | EM:  0.0, F1:  3.27, WER: 4.63 |
 
 Na tabela, apresentamos alguns resultados específicos. (Uma tabela mais completa pode ser encontrada na pasta `experiments/results/` ou no arquivo `experiments/UVQuAD.ipynb`) juntamente com suas métricas correspondentes para cada resultado. Podemos observar desses resultados que, por exemplo:
 
@@ -355,7 +335,7 @@ Já no **ID 1154**, o ChatGPT forneceu uma resposta relativamente precisa com um
 
 ## **Comparação grafica**
 
-A continuacion se presenta una tabla de ocurrencia para cada una de las metricas usadas en este trabajo:
+A seguir, apresenta-se uma tabela de ocorrência para cada uma das métricas utilizadas neste trabalho:
 
 ![Untitled](.figure/Untitled%201.png)
 
@@ -420,6 +400,7 @@ Essas observações levam em consideração as diferentes nuances das métricas 
     - Ambos os modelos apresentaram resultados pouco favoráveis, mas destacou-se a possibilidade de melhorias por meio de pesquisas mais aprofundadas, como ajustes nos hiperparâmetros, treinamento com dados específicos e revisão da formulação de perguntas.
 7. **Sugestões para Futuras Melhorias:**
     - Sugere-se analisar casos específicos de falhas, ajustar conjuntos de dados e fórmulas de perguntas, considerar o treinamento com dados específicos para a Unicamp e avaliar a possibilidade de fornecer respostas alternativas ou usar uma abordagem de múltiplos modelos.
+    - Sugere-se analisar e melhorar o prompt para que gere resultados mais precisos e menos abrangentes.
 8. **Avaliação Integral:**
     - A avaliação integral dos modelos deve considerar não apenas métricas quantitativas, mas também a qualidade e relevância subjetiva das respostas geradas em contextos específicos.
 
