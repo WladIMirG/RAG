@@ -7,6 +7,7 @@ import os
 class ConvHistory:
     def __init__(self):
         self.messages = []
+        self.input_messages = []
         self.offset = 0
         self.system_message = "¡Hola! Soy tu chatbot para el Vestibular da Unicamp 2024. ¿En qué puedo ayudarte?"
         
@@ -18,11 +19,15 @@ class ConvHistory:
         """Append a new message."""
         self.messages.append([role, message])
     
-    def to_openai_api_messages(self):
+    def append_inpuntmessage(self, role: str, message: str):
+        """Append a new message."""
+        self.input_messages.append([role, message])
+    
+    def to_openai_api_messages(self, messages: list = None):
         """Convert the conversation to OpenAI chat completion format."""
         ret = [{"role": "system", "content": self.system_message}]
 
-        for i, (_, msg) in enumerate(self.messages[self.offset :]):
+        for i, (_, msg) in enumerate(messages[self.offset :]):
             if i % 2 == 0:
                 ret.append({"role": "user", "content": msg})
             else:
@@ -31,7 +36,7 @@ class ConvHistory:
         return ret
 
 class UVQuADChatBotRetriever:
-    def __init__(self, data_path: str = "../data/processed/context_data.csv"):
+    def __init__(self, data_path: str = "../../data/processed/context_data.csv"):
         self.data = pd.read_csv(data_path)
         self.from_texts(self.data['context'].to_list())
         
@@ -57,6 +62,7 @@ class GPT3ChatBot:
     def retriever_set_message(self, question: str):
         context = self.retriever_get_context(question)
         user_message = f"Com base no contexto: {context}, responda a pergunta: {question}. Resposta:"
+        self.conv.append_inpuntmessage("user", question)
         self.conv.append_message("user", user_message)
         # return context['context']
     
@@ -74,6 +80,7 @@ class GPT3ChatBot:
             messages=self.conv.to_openai_api_messages(),
             max_tokens=100,
         )
+        self.conv.append_inpuntmessage("assistant", response.choices[0].message.content)
         self.conv.append_message("assistant", response.choices[0].message.content)
         return response.choices[0].message.content
 
@@ -82,10 +89,10 @@ class MariTalkConvHistory(ConvHistory):
     def __init__(self):
         super().__init__()
     
-    def to_maritalk_api_messages(self):
+    def to_maritalk_api_messages(self, messages: list = None):
         """Convert the conversation to OpenAI chat completion format."""
         ret = [{"role": "assistant", "content": self.system_message}]
-        for i, (_, msg) in enumerate(self.messages[self.offset :]):
+        for i, (_, msg) in enumerate(messages[self.offset :]):
             if i % 2 == 0:
                 ret.append({"role": "user", "content": msg})
             else:
@@ -107,6 +114,7 @@ class MariTalkChatBot:
     def retriever_set_message(self, question: str):
         context = self.retriever_get_context(question)
         user_message = f"""Com base no contexto: "{context.page_content}", responda a pergunta: "{question}". Resposta:"""
+        self.conv.append_inpuntmessage("user", question)
         self.conv.append_message("user", user_message)
         # return context['context']
     
@@ -119,7 +127,7 @@ class MariTalkChatBot:
     
     def get_answer_from_maritalk(self, question: str):
         self.retriever_set_message(question)
-        messages = self.conv.to_maritalk_api_messages()
+        messages = self.conv.to_maritalk_api_messages(self.conv.messages)
         # print(f"Input Messages: {messages}\n")
         try:
             response = self.agent.generate(
@@ -128,7 +136,9 @@ class MariTalkChatBot:
                 max_tokens=100,
                 temperature=0.7,
                 top_p=0.95)
+            self.conv.append_inpuntmessage("assistant", response)
             self.conv.append_message("assistant", response)
+            # print(f"Response: {response}\n")
             return response
         except Exception as e:
             return {"Erro": e}

@@ -1,19 +1,24 @@
 <div>
-
-    {% for message in messages %}
-        {% if message.role == 'user' %}
-            <p class="{{ message.role }}">
-                <strong>Tu:</strong> {{ message.content.content }}
-            </p>
-        {% else %}
-            <p class="{{ message.role }}">
-                <strong>Chatbot:</strong> {{ message.content.content }}
-            </p>
-        {% endif %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.role == "user" %}
+                <p class="{{ message.role }}">
+                    <strong>Tu:</strong> {{ message.content }}
+                </p>
+            {% else %}
+                <p class="{{ message.role }}">
+                    <strong>Chatbot:</strong> {{ message.content }}
+                </p>
+            {% endif %}
+            {% comment %} <p class="{{ message.role }}">
+                <strong>Chatbot:</strong> {{ message }}
+            </p> {% endcomment %}
+        {% endfor %}
+    {% else %}
         <p class="{{ message.role }}">
-            <strong>Chatbot:</strong> {{ message }}
+            <strong>Chatbot:</strong> {{ response }}
         </p>
-    {% endfor %}
+    {% endif %}
 </div>
 
 <form action="" method="post">
