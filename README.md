@@ -5,6 +5,14 @@
 >
 >Pode consultar a versão em PDF de este projeto [Informe_chatbot.pdf](/Informe_chatbot%20.pdf)
 ___
+# Materiais
+- OpenAI API
+- Maritaka API
+- DJango
+- LangChain
+- PyMuPDF
+- BM25Retriever
+- rank_bm25
 
 # UVQuAD
 
